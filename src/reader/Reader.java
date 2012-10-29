@@ -9,6 +9,7 @@ import java.util.Vector;
 public class Reader {
 	String file;
 	Vector<String> text;
+	String[] keys;
 
 	public Reader(String file) {
 		this.file = file;
@@ -16,8 +17,8 @@ public class Reader {
 	}
 	
 	/**
-	 * Read a text file, building a table of contents that uses
-	 * a HashTable and a TrieTree
+	 * Read a text file, separate the  text, stored in 'text'
+	 * and the key words in 'keys'
 	 * @throws IOException
 	 */
 	public void readFile() throws IOException
@@ -32,8 +33,8 @@ public class Reader {
 			//If line is '#', next line is key words
 			if(line.equals("#"))
 			{
-				System.out.println("TODO: save key words in hash table!");
-				//TODO: save key words in hash table!
+				line = in.readLine();
+				keys = line.split(",");
 			}
 			else
 			{
