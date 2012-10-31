@@ -72,6 +72,14 @@ public class Reader {
 		this.trie = trie;
 	}
 
+	public Vector<String> getText() {
+		return text;
+	}
+
+	public void setText(Vector<String> text) {
+		this.text = text;
+	}
+
 	public void searchKeyWords()
 	{
 		for(String key: keys)
