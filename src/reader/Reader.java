@@ -1,5 +1,8 @@
 package reader;
 
+import hash.HashTable;
+import tree.trie.TrieTree;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,10 +13,15 @@ public class Reader {
 	String file;
 	Vector<String> text;
 	String[] keys;
+	HashTable hash;
+	TrieTree trie;
 
-	public Reader(String file) {
+	public Reader(String file) throws IOException {
 		this.file = file;
 		this.text = new Vector<String>();
+		this.hash = new HashTable();
+		this.trie = new TrieTree();
+		readFile();
 	}
 	
 	/**
@@ -45,6 +53,55 @@ public class Reader {
 				}
 			}
 			
+		}
+	}
+	
+	public HashTable getHash() {
+		return hash;
+	}
+
+	public void setHash(HashTable hash) {
+		this.hash = hash;
+	}
+
+	public TrieTree getTrie() {
+		return trie;
+	}
+
+	public void setTrie(TrieTree trie) {
+		this.trie = trie;
+	}
+
+	public void searchKeyWords()
+	{
+		for(String key: keys)
+		{
+			Vector<Integer> lines = new Vector<Integer>();
+			
+			trie.insert(key);
+			for(int i = 0; i < text.size(); i++)
+			{
+				//System.out.println("text.get(i).contains(key): " + text.get(i).contains(key));
+				//System.out.println("text.get(i): " + text.get(i) + "key: " + key);
+				if(text.get(i).contains(key))
+				{
+					lines.add(i);
+				}
+			}
+			System.out.print("key: " + key + " lines: ");
+			int[] l = new int[lines.size()];
+			for(int i = 0; i < lines.size(); i++)
+			{
+				l[i] = lines.get(i);
+			}
+			for(int k: l)
+			{
+				System.out.print(k + ", ");
+			}
+			System.out.println();
+			System.out.println("hash.add(key, l): " + key + " " +  l);
+			hash.add(key, l);
+			System.out.println("hash.get(): " + hash.get(key));
 		}
 	}
 	
