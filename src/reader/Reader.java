@@ -81,27 +81,18 @@ public class Reader {
 			trie.insert(key);
 			for(int i = 0; i < text.size(); i++)
 			{
-				//System.out.println("text.get(i).contains(key): " + text.get(i).contains(key));
-				//System.out.println("text.get(i): " + text.get(i) + "key: " + key);
 				if(text.get(i).contains(key))
 				{
 					lines.add(i);
 				}
 			}
-			System.out.print("key: " + key + " lines: ");
+			
 			int[] l = new int[lines.size()];
 			for(int i = 0; i < lines.size(); i++)
 			{
 				l[i] = lines.get(i);
 			}
-			for(int k: l)
-			{
-				System.out.print(k + ", ");
-			}
-			System.out.println();
-			System.out.println("hash.add(key, l): " + key + " " +  l);
-			hash.add(key, l);
-			System.out.println("hash.get(): " + hash.get(key));
+			hash.add(key.toLowerCase(), l);
 		}
 	}
 	
