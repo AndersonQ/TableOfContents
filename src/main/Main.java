@@ -15,7 +15,7 @@ public class Main {
 		TrieTree trie;
 		HashTable hash;
 		Reader reader;
-		Vector<String> keys;
+		Vector<String> keys, text;
 		//Checking parameters
 		if(args.length != 1)
 		{
@@ -27,23 +27,46 @@ public class Main {
 		reader.readFile();
 		reader.searchKeyWords();
 		
+		//Get the text
+		text = reader.getText();
+		//Get trie
 		trie = reader.getTrie();
+		//Get hashtable
 		hash = reader.getHash();
+		//Get all stored keys
 		keys = trie.getAll();
+		
+		//Print text
+		System.out.println("Text:");
+		for(String l: text)
+		{
+			System.out.println(l);
+		}
+		
+		//Print keys
+		System.out.print("\nKey words: ");
 		System.out.println(keys);
-		trie.print();
-		System.out.println("\n-----------------" + keys.size());
+		//uncomment to Print the trie tree
+		//trie.print();
+		
+		//Print all keys and your element stored into hashtable
+		System.out.println("\nTable of Contents\n");
 		for(int i = 0; i < keys.size(); i++)
 		{
 			int[] lines;
-			System.out.println("Searching: " + keys.get(i));
+			
+			System.out.print(keys.get(i) + " ");
+			//Get element to key i
 			lines = hash.get(keys.get(i));
-			System.out.println("lines: " + lines);
-			System.out.print(keys.get(i) + ": ");
-			for(int l: lines)
+			
+			if(lines != null)
 			{
-				System.out.print(l + ", ");
+				for(int l: lines)
+				{
+					System.out.print(l + ", ");
+				}
 			}
+			System.out.println();
 		}
 	}
 }
