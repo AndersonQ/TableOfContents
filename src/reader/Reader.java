@@ -18,10 +18,6 @@ public class Reader {
 
 	public Reader(String file) throws IOException {
 		this.file = file;
-		this.text = new Vector<String>();
-		this.hash = new HashTable();
-		this.trie = new TrieTree();
-		readFile();
 	}
 	
 	/**
@@ -31,6 +27,9 @@ public class Reader {
 	 */
 	public void readFile() throws IOException
 	{
+		this.text = new Vector<String>();
+		this.hash = new HashTable();
+		
 		String line;
 		BufferedReader in = new BufferedReader(new FileReader(this.file));
 		
@@ -43,6 +42,7 @@ public class Reader {
 			{
 				line = in.readLine();
 				keys = line.split(",");
+				break;
 			}
 			else
 			{
@@ -82,6 +82,8 @@ public class Reader {
 
 	public void searchKeyWords()
 	{
+		this.trie = new TrieTree();
+		
 		for(String key: keys)
 		{
 			Vector<Integer> lines = new Vector<Integer>();
